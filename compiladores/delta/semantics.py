@@ -75,3 +75,6 @@ class SemanticVisitor(PTNodeVisitor):
                 'Undeclared variable reference at position '
                 f'{self.position(node)} => {name}'
             )
+    
+    def visit_comp_op(self, node, children):
+        pass
