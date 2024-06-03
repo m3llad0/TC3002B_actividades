@@ -8,9 +8,9 @@ declaration = 'var' decl_variable (',' decl_variable)* ';'
 decl_variable = identifier
 assignment = lhs_variable '=' expression ';'
 lhs_variable = identifier
-if = 'if' expression block ('else' block)?
-block = '{' statement* '}'
+if = 'if' expression block ('else if' expression block)* ( 'else' block )? 
 while = 'while' expression block
+block = '{' statement* '}'
 expression = comparison ('&&' comparison)*
 comparison = additive (comp_op additive)*
 additive = multiplicative (('+' / '-') multiplicative)*

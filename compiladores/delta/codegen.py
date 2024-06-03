@@ -45,10 +45,16 @@ class CodeGenerationVisitor(PTNodeVisitor):
         result = (children[0]
                   + '    if\n'
                   + children[1])
-        if len(children) == 3:
-            result += ('    else\n'
-                       + children[2])
-        result += '    end\n'
+        for i in range (2, len(children),1):
+            if i % 2 == 0:
+                result += ('    else\n'
+                           +children[i])  # expression or 'else'
+            else:
+                result += ('    if\n'
+                           +children[i])
+            
+
+        result += '    end\n' * (len(children) // 2)
         return result
 
     def visit_block(self, node, children):
