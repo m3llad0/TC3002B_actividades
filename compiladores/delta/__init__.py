@@ -1,3 +1,4 @@
+# __init__.py
 from enum import Enum
 from os import path
 from arpeggio import visit_parse_tree, NoMatch

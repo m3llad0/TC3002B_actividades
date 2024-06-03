@@ -1,3 +1,5 @@
+#codegen.py
+
 from arpeggio import PTNodeVisitor
 
 
@@ -103,6 +105,16 @@ class CodeGenerationVisitor(PTNodeVisitor):
 
     def visit_decimal(self, node, children):
         return f'    i32.const { node.value }\n'
+
+    def visit_integer_literal(self, node, children):
+        value = None
+        if node.value.startswith('#b'):
+            value = int(node.value[2:], 2)
+        elif node.value.startswith('#o'):
+            value = int(node.value[2:], 8)
+        elif node.value.startswith('#x'):
+            value = int(node.value[2:], 16)
+        return f'    i32.const {value}\n'
 
     def visit_boolean(self, node, children):
         if children[0] == 'true':

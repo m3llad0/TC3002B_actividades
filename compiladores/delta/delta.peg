@@ -1,5 +1,3 @@
-//# Gramática del lenguaje delta
-
 comment = r'[/][/].*|[/][*](.|\n)*?[*][/]'
 
 identifier = r'[a-zA-Z]\w*'
@@ -17,8 +15,12 @@ expression = additive ('&&' additive)*
 additive = multiplicative (('+' / '-') multiplicative)*
 multiplicative = unary (('*' / '/' / '%') unary)*
 unary = ('+' / '-' / '!')* primary
-primary = decimal / boolean / parenthesis / rhs_variable
+primary = decimal / integer_literal / boolean / parenthesis / rhs_variable
 decimal = r'\d+'
+integer_literal = binary / octal / hexadecimal
+binary = r'#b[01]+'
+octal = r'#o[0-7]+'
+hexadecimal = r'#x[0-9a-fA-F]+'
 boolean = 'true' / 'false'
 parenthesis = '(' expression ')'
 rhs_variable = identifier

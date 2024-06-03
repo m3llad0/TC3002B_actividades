@@ -1,3 +1,5 @@
+#semantics.py
+
 from arpeggio import PTNodeVisitor
 
 
@@ -51,6 +53,19 @@ class SemanticVisitor(PTNodeVisitor):
             raise SemanticMistake(
                 'Out of range decimal integer literal at position '
                 f'{self.position(node)} => {value}'
+            )
+    
+    def visit_integer_literal(self, node, children):
+        value = None
+        if node.value.startswith('#b'):
+            value = int(node.value[2:], 2)
+        elif node.value.startswith('#o'):
+            value = int(node.value[2:], 8)
+        elif node.value.startswith('#x'):
+            value = int(node.value[2:], 16)
+        if value is not None and value >= 2 ** 31:
+            raise SemanticMistake(
+                f'Out of range integer literal at {self.position(node)} => {value}'
             )
 
     def visit_rhs_variable(self, node, children):
