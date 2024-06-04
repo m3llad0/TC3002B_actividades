@@ -78,3 +78,6 @@ class SemanticVisitor(PTNodeVisitor):
     
     def visit_comp_op(self, node, children):
         pass
+
+    def visit_or_expr(self, node, children):
+        pass  
