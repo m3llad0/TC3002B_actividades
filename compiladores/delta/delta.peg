@@ -3,13 +3,14 @@ comment = r'[/][/].*|[/][*](.|\n)*?[*][/]'
 identifier = r'[a-zA-Z]\w*'
 
 program = statement* expression EOF
-statement = declaration / assignment / if / while
+statement = declaration / assignment / if / while / do
 declaration = 'var' decl_variable (',' decl_variable)* ';'
 decl_variable = identifier
 assignment = lhs_variable '=' expression ';'
 lhs_variable = identifier
 if = 'if' expression block ('else if' expression block)* ( 'else' block )? 
 while = 'while' expression block
+do = 'do' block 'while' expression ';'
 block = '{' statement* '}'
 expression = comparison ('&&' comparison)*
 comparison = additive (comp_op additive)*
